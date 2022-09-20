@@ -24,7 +24,7 @@ body {
 }
 
 h1 {
-  color: #fff;
+  color: #FFF;
 }
 
 .form-control {
@@ -38,6 +38,11 @@ h1 {
   width: 25%;
   margin: 20px auto 0;
   padding: 20px;
-  background: #fff;
+  background: #FFF;
+}
+
+.error-message {
+  margin-top: 10px;
+  color: #FF0000;
 }
 

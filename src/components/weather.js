@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { API_KEY } from './../constants/index';
+import { locationSearch } from './../utils/validation';
 
 function Weather() {
   const [inputValue, setInputValue] = useState("");
   const [data, setData] = useState(null);
   const [city, setCity] = useState("");
+  const [errorMsg, setError] = useState("");
 
   // function get weather data
   const getWeatherData = (query) => {
@@ -14,6 +16,10 @@ function Weather() {
         return res.json();
       })
       .then((res) => {
+        console.log('res: >>', res);
+        if (res.cod === "404" || locationSearch(query)) {
+          setError("Please Enter City Name")
+        }
         setData(res.main);
         setCity(query);
       })
@@ -52,7 +58,7 @@ function Weather() {
           </div>
         </div>
         ) : (
-          null
+          <p className="error-message">{errorMsg}</p>
         )}
       </div>
     </>
