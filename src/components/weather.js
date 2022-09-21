@@ -36,8 +36,8 @@ function Weather() {
 
   // Storing history of searched countries
   useEffect(() => {
-    if (lastSearched) {
-      localStorage.setItem('lastSearchedCountry', lastSearched)
+    if (lastSearched.length && lastSearched.indexOf(inputValue) === -1 && inputValue) {
+      localStorage.setItem('lastSearchedCountry', [...lastSearched, inputValue]) 
     }
   });
 
@@ -83,7 +83,10 @@ function Weather() {
                 <p className="country-list">{ele}</p>
               );
             })
-          ) : null
+          ) : localStorage.getItem('lastSearchedCountry') ? (
+            <p className="country-list">{localStorage.getItem('lastSearchedCountry')}</p>
+          ) 
+          : null
         }
       </div>
     </> 
