@@ -5,6 +5,7 @@ import { locationSearch } from './../utils/validation';
 function Weather() {
   const [inputValue, setInputValue] = useState("");
   const [data, setData] = useState(null);
+  const [weatherDump, setWeatherDump] = useState(null);
   const [city, setCity] = useState("");
   const [errorMsg, setError] = useState("");
 
@@ -21,6 +22,7 @@ function Weather() {
           setError("Please Enter City Name")
         }
         setData(res.main);
+        setWeatherDump(res)
         setCity(query);
       })
       .catch(() => {
@@ -43,19 +45,19 @@ function Weather() {
         type="submit"
         onClick={() => getWeatherData(inputValue)}
       >
-        Submit
+        Search
       </button>
       <div>
         {
         data ? (
         <div className="weather-info card">
-          <p className="weather-p-city">Weather Details of City : {city}</p>
-          
-          <div className="weather-information-container">
-          <p >Current Temperature : {data.temp} °C</p>
-          <p >Temperature Range : {data.temp_min} °C  to  {data.temp_max} °C</p>
-          <p >Humidity  : {data.humidity}</p>
-          </div>
+          <h2>
+            {city}
+            <sup>{weatherDump.sys.country}</sup>
+          </h2>
+          <p className="temperature">{Math.round(data.temp)} °C</p>
+          <img className="icon-weather" width="40" src={`https://openweathermap.org/img/wn/${weatherDump.weather[0].icon}.png`} alt={weatherDump.weather[0].desccription} />
+          <p className="temperature">{weatherDump.weather[0].description}</p>
         </div>
         ) : (
           <p className="error-message">{errorMsg}</p>
