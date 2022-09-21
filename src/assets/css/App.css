@@ -28,7 +28,7 @@ h1 {
   margin-bottom: 20px;
 }
 
-h2 { text-transform: capitalize; }
+h2, h3 { text-transform: capitalize; }
 
 sup {
   width: 30px;
@@ -62,5 +62,14 @@ sup {
 .error-message {
   margin-top: 10px;
   color: #FF0000;
+}
+
+.country-list {
+  margin-bottom: 10px;
+}
+
+.last-searched {
+  max-height: 300px;
+  overflow: auto;
 }
 
